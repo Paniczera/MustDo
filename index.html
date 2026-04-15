@@ -2,17 +2,29 @@
 <html lang="pt-BR">
     <head>
         <meta charset="utf-8">
-        <title>JavaScript</title>
+        <title>MustDo!</title>
         <link rel="stylesheet" href="style.css">
     </head>
 
     <body>
 
-        <input type="text" id="inputTarefa"
-        placeholder="Digite uma tarefa">
+        <div id = "tituloSite">
+            <h1>MustDo!</h1>
+        </div>
 
-        <button id="botao">Adicionar</button>
-    
-        <script src="script.js"></script> 
+        <div id="listaTarefas">
+            <ul id="tarefas">
+
+                <li>
+                    Tarefa 1:
+                    <input type="text" id="inputTarefa"
+                    placeholder="Digite uma tarefa">
+                    <button id="botao">Adicionar</button>
+                    <p id = "tarefa1"></p>
+                </li></br>
+            </ul>
+        </div>
+            <script src="script.js"></script> 
+
     </body>
 </html>
