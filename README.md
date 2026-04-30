@@ -32,6 +32,8 @@ Esse projeto foi desenvolvido com o objetivo principal de por em prática minhas
     style="padding-right: 10px;" 
     src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" 
 />
+<br/>
+# 🛠️ Tecnologias que serão utilizadas futuramente:
 <img 
     align="left" 
     alt="React"
