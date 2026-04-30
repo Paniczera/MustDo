@@ -43,7 +43,7 @@ Esse projeto foi desenvolvido com o objetivo principal de por em prática minhas
 
 # ⚙️ Funcionalidades
 <p>✅ Adicionar tarefas</p>
-<p>⏳ Remover tarefas</p>
+<p>✅ Remover tarefas</p>
 <p>⏳ Marcar como concluída</p>
 <p>⏳ Definir grau de prioridade</p>
 <p>⏳ Persistência de dados</p>
