@@ -7,7 +7,7 @@ Aplicação web para gerenciamento de tarefas diárias, com níveis de prioridad
 # 📌 Sobre o projeto
 
 Esse projeto foi desenvolvido com o objetivo principal de por em prática minhas habilidades em desenvolvimento web.
-Link do vídeo de explicação do projeto: https://youtu.be/WBqECXRr4_w
+<p> Link do vídeo de explicação do projeto: https://youtu.be/WBqECXRr4_w
 
 # 🛠️ Tecnologias utilizadas até o momento:
 
