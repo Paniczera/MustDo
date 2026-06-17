@@ -14,6 +14,11 @@ let filtroAtual = "todas";
 
 // Quando o botão for clicado, executa a função adicionaTarefa.
 botaoAdicionar.addEventListener('click', adicionaTarefa);
+inputTarefa.addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        adicionaTarefa();
+    }
+});
 
 function adicionaTarefa() {
 
@@ -159,6 +164,19 @@ function porcentagem() {
     let porcentagem = totalTarefas > 0 ? (concluidas / totalTarefas) * 100 : 0;
     document.getElementById('textoProgresso').innerText = `${porcentagem.toFixed(2)}%`;
     document.getElementById('barraProgresso').style.width = `${porcentagem}%`;
+
+}
+
+function limparTarefas() {
+    const botaoLimpar = document.getElementById('limparConcluidas');
+
+    if (botaoLimpar) {
+        botaoLimpar.addEventListener('click', function() {
+            arrayTarefas = arrayTarefas.filter(tarefa => tarefa.concluida === false);
+            salvarTarefas();
+            renderizarTarefas();
+        })
+    }
 }
 
 function modoDark() {
@@ -176,12 +194,12 @@ function configurarFiltros() {
     botoesFiltro.forEach(botao => {
         botao.addEventListener('click', function() {
             // Remove a classe ativo de todos
-            botoesFiltro.forEach(b => b.classList.remove('ativo'));
+            botoesFiltro.forEach(botoes => botoes.classList.remove('ativo'));
             
             // Adiciona só no que foi clicado
             this.classList.add('ativo');
             
-            // Atualiza a variável global que criamos lá no topo
+            // Atualiza a variável global que criei lá no topo
             filtroAtual = this.getAttribute('data-filtro');
             
             // Renderiza a lista novamente com a nova "lente"
@@ -190,6 +208,11 @@ function configurarFiltros() {
     });
 }
 
+
+
+
+
 carregarTarefas();
 modoDark();
 configurarFiltros();
+limparTarefas();

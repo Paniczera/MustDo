@@ -307,6 +307,23 @@ header {
     font-weight: 600;
 }
 
+.limparConcluidas {
+    background-color: transparent;
+    border: 1px solid #393f47;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+    color: #393f47;
+    cursor: pointer;
+    transition: 0.2s;
+    margin: 0 auto;
+    display: flex;
+}
+
+.limparConcluidas:hover {
+    background-color: #e53e3e2c;
+    color: #e53e3e;
+}
 
 
 .num-total { color: var(--text-dark); }
