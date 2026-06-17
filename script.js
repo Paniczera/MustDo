@@ -10,6 +10,7 @@ const listaDOM = document.getElementById('lista');
 // Array principal da aplicação.
 // Armazena todas as tarefas cadastradas.
 let arrayTarefas = [];
+let filtroAtual = "todas";
 
 // Quando o botão for clicado, executa a função adicionaTarefa.
 botaoAdicionar.addEventListener('click', adicionaTarefa);
@@ -50,8 +51,16 @@ function renderizarTarefas() {
     // Limpa a lista antes de renderizar novamente.
     listaDOM.innerHTML = '';
 
+    //cria um novo array filtrado, contendo apenas as tarefas que correspondem ao filtro selecionado.
+    let tarefasFiltradas = arrayTarefas; // Por padrão, mostra todas as tarefas.
+
+    if (filtroAtual === 'pendentes') {
+        tarefasFiltradas = arrayTarefas.filter(tarefa => !tarefa.concluida);
+    } else if (filtroAtual === 'concluidas') {
+        tarefasFiltradas = arrayTarefas.filter(tarefa => tarefa.concluida === true);
+    }    
     // Percorre cada tarefa armazenada no array.
-    arrayTarefas.forEach(function(tarefa, indice) {
+    tarefasFiltradas.forEach(function(tarefa, indice) {
 
         // Cria o elemento visual (<li>) da tarefa.
         let tarefaDOM = document.createElement('li');
@@ -101,7 +110,8 @@ function renderizarTarefas() {
 
         // Remove a tarefa do array.
         botaoExcluir.addEventListener('click', function() {
-            arrayTarefas.splice(indice, 1);
+            let indiceReal = arrayTarefas.indexOf(tarefa);
+            arrayTarefas.splice(indiceReal, 1);
             renderizarTarefas();
         });
 
@@ -112,6 +122,7 @@ function renderizarTarefas() {
         // Adiciona o <li> à lista principal.
         listaDOM.appendChild(tarefaDOM);
     });
+    
     
     salvarTarefas();
     estatisticas();
@@ -157,5 +168,28 @@ function modoDark() {
     });
 }
 
+function configurarFiltros() {
+    // Busca todos os botões que têm a classe .btn-filtro (certifique-se de que no HTML eles têm essa classe!)
+    const botoesFiltro = document.querySelectorAll('.btn-filtro'); 
+    
+    // O forEach é obrigatório aqui para passar de botão em botão
+    botoesFiltro.forEach(botao => {
+        botao.addEventListener('click', function() {
+            // Remove a classe ativo de todos
+            botoesFiltro.forEach(b => b.classList.remove('ativo'));
+            
+            // Adiciona só no que foi clicado
+            this.classList.add('ativo');
+            
+            // Atualiza a variável global que criamos lá no topo
+            filtroAtual = this.getAttribute('data-filtro');
+            
+            // Renderiza a lista novamente com a nova "lente"
+            renderizarTarefas();
+        });
+    });
+}
+
 carregarTarefas();
 modoDark();
+configurarFiltros();

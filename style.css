@@ -8,7 +8,7 @@
     --yellow-accent: #dca11d;/* Amarelo de pendentes */
     --sombra-suave: 0px 6px 16px rgba(0, 0, 0, 0.06);
 
-    --dm-color: #111827;     /* Fundo escuro */
+    --dm-color: #0d131f;     /* Fundo escuro */
     --dm-card-bg: #1f2937;      /* Fundo dos cards escuro */
     --dm-text-dark: #f3f4f6;    /* Texto principal claro */
     --dm-text-muted: #9ca3af;   /* Texto cinza claro (datas, subtítulos) */
@@ -270,6 +270,41 @@ header {
     background-color: var(--dm-color);
     color: var(--dm-text-dark);
     
+}
+
+/* O contêiner dos botões */
+.filtros-lista {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* O estilo base dos botões */
+.btn-filtro {
+    background-color: transparent;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    color: var(--text-muted);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* Efeito ao passar o mouse */
+.btn-filtro:hover {
+    background-color: var(--card-bg);
+    box-shadow: var(--sombra-suave);
+}
+
+/* O botão que está selecionado no momento */
+.btn-filtro.ativo {
+    background-color: var(--card-bg);
+    color: var(--text-dark);
+    box-shadow: var(--sombra-suave);
+    font-weight: 600;
 }
 
 
