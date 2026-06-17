@@ -1,21 +1,242 @@
+:root {
+    --bg-color: #f6f5f2;     /* Fundo bege bem claro */
+    --card-bg: #ffffff;      /* Fundo branco dos cards */
+    --text-dark: #2d3748;    /* Texto principal escuro */
+    --text-muted: #a0aec0;   /* Texto cinza claro (datas, subtítulos) */
+    --green-dark: #3b5a40;   /* Verde escuro do título */
+    --green-light: #6ba676;  /* Verde claro (botão e acentos) */
+    --yellow-accent: #dca11d;/* Amarelo de pendentes */
+    --sombra-suave: 0px 6px 16px rgba(0, 0, 0, 0.06);
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: 'Inter', sans-serif;
+    color: var(--text-dark);
+    margin: 0;
+    padding: 20px;
+}
+
+
 li button {
     margin-left: 10px;
 }
 
+h1 {
+    font-size: 70px;
+    text-align: center;
+}
+
+ul#lista {
+    max-width: 100% !important; 
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+header {
+    margin: 0 auto;
+    padding: 20px;
+}
+
 #tituloSite {
     text-align: center;
-    font-size: 25px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
 }
 
-#titulo1 {
+#logo {
     color: white;
-    -webkit-text-stroke: 1px black;
+    -webkit-text-stroke: 1px #3e4652;
     text-shadow: 2px 2px 3px rgba(0,0,0,0.5);
 }
 
 
-#titulo2 {
+#logo2 {
     color: green;
-    -webkit-text-stroke: 1px black;
+    -webkit-text-stroke: 1px #3e4652;
     text-shadow: 2px 2px 3px rgba(0,0,0,0.5);
 }
+
+.container {
+    max-width: 750px; /* Limita a largura para ficar igual ao Figma */
+    margin: 0 auto;   /* Centraliza o bloco inteiro na tela */
+    width: 100%;      /* Garante responsividade em telas menores */    
+}
+
+.header-data {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.header-data {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.header-info {
+    display: flex;
+    justify-content: space-between; /* Joga a data pra esquerda e o botão pra direita */
+    align-items: center;
+    border-bottom: 1px solid #e2e1dd;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+    width: 100%; /* Isso é crucial para eles se afastarem */
+}
+
+.dark-mode {
+    background: transparent;
+    border: 1px solid #d1d1d1;
+    border-radius: 20px;
+    padding: 6px 15px;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+}
+
+.area-adicionar {
+    background-color: var(--card-bg); /* Fundo branco (use sua variável ou #fff) */
+    border-radius: 16px;              /* Bem arredondado */
+    padding: 10px 15px;               /* Espaço interno */
+    display: flex;
+    align-items: center;              /* Centraliza tudo verticalmente */
+    justify-content: space-between;   /* Input na esquerda, botão na direita */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03); /* Sombra suave */
+    margin-bottom: 30px;
+}
+
+.area-adicionar input {
+    border: none;             /* Tira a borda do input */
+    background: transparent;  /* Tira o fundo cinza/branco do input */
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-dark);
+    flex: 1;                  /* Faz o input empurrar o botão lá pro final */
+    outline: none;            /* Tira aquela linha preta ao clicar */
+    padding-left: 10px;
+}
+
+.area-adicionar button {
+    background-color: #30b14c; /* O verde claro puxado do seu Figma */
+    color: white;
+    border: none;
+    border-radius: 10px;       /* Um pouco arredondado */
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;     /* Transição suave no hover */
+}
+
+.area-adicionar button:hover {
+    background-color: #2a5e35; /* Escurece de leve ao passar o mouse */
+    box-shadow: var(--sombra-suave);
+}
+
+.filtros {
+    display: flex;
+    justify-content: space-between; /* Espalha os cards pela largura toda */
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.card {
+    background-color: var(--card-bg);
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border-radius: 12px;
+    width: 100%; /* Faz eles terem o mesmo tamanho */
+    box-shadow: var(--sombra-suave); /* Sombreado bem suave */
+}
+
+.card-icon {
+    font-size: 20px;
+    margin-right: 15px;
+}
+
+.card-dados {
+    display: flex;
+    flex-direction: column; /* Empilha o número em cima da palavra */
+}
+
+.num-card {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.text-card {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.container {
+    max-width: 800px; /* Aumentei um pouco para caber o novo design */
+    margin: 0 auto;
+}
+
+.input {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.card-tarefa {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    width: 100%; /* <-- A MÁGICA: Substitui o antigo 500px para esticar tudo! */
+    box-sizing: border-box; /* Impede que o padding faça a caixa vazar do limite */
+    
+    /* O visual novo estilo Figma */
+    background-color: var(--card-bg, #ffffff); /* Fundo branco */
+    padding: 15px 20px;                        /* Mesmo respiro interno da área de input */
+    margin: 0 0 12px 0;                       /* Espaçamento entre as tarefas */
+    border: none;                              /* Tira aquela borda cinza "dura" antiga */
+    border-radius: 12px;                       /* Arredondamento idêntico aos cards de cima */
+    box-shadow: var(--sombra-suave);   /* Sombreado elegante */
+}
+
+.card-tarefa button {
+    background-color: transparent;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 12px;    
+    color: var(--text-muted, #a0aec0);
+    cursor: pointer;
+    transition: 0.2s;
+    margin-left: 8px; /* Dá um espacinho entre os dois botões */
+}
+
+.botaoConcluir {
+    background-color: transparent;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 12px;    
+    color: var(--text-muted, #a0aec0);
+    cursor: pointer;
+    transition: 0.2s;
+    margin-left: 8px; /* Dá um espacinho entre os dois botões */
+}
+
+
+.botaoConcluir:hover {
+    background-color: #3ac2572c;
+    color:#3ac257;
+}
+
+.botaoExcluir:hover {
+    background-color: #e53e3e2c;
+    color: #e53e3e;
+}
+
+.num-total { color: var(--text-dark); }
+.num-pendente { color: var(--yellow-accent); }
+.num-concluida { color: var(--green-light); }

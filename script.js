@@ -1,62 +1,144 @@
-const botao = document.getElementById('botao');
-const input = document.getElementById('inputTarefa');
-const lista = document.getElementById('lista');
-//Definição das variáveis que vão pegar elementos diretamente do DOM.
+// Botão responsável por adicionar uma nova tarefa.
+const botaoAdicionar = document.getElementById('botao');
 
-let listaDeTarefas = [];
-//variável que cria a lista de tarefas para armazenar mais de uma tarefa por vez
+// Campo onde o usuário digita a tarefa.
+const inputTarefa = document.getElementById('inputTarefa');
 
-botao.addEventListener('click', adicionaTarefa);
-//o método addEventListener está linkando a variável botao ao DOM
+// Lista (<ul>) exibida na página.
+const listaDOM = document.getElementById('lista');
+
+// Array principal da aplicação.
+// Armazena todas as tarefas cadastradas.
+let arrayTarefas = [];
+
+// Quando o botão for clicado, executa a função adicionaTarefa.
+botaoAdicionar.addEventListener('click', adicionaTarefa);
 
 function adicionaTarefa() {
 
-    if(input.value.trim() === '') return;
-    //validação de entrada, caso o usuário tente adicioanr um valor vazio, nada acontece.
+    // Impede que tarefas vazias sejam adicionadas.
+    if (inputTarefa.value.trim() === '') return;
 
-    let tarefa = input.value;
-    listaDeTarefas.push(input.value);
-    //guarda o texto digitado na variavel tarefa, em seguida envia o conteúdo da variavel
-    //tarefa para o array ListaDeTarefas.
-    
-    input.value = '';
-    input.placeholder = 'Tarefa Adicionada!';
-    //limpa o campo para o próximo uso, retornando um texto de feedback ao usuário.
+    // Objeto que representa uma tarefa.
+    const tarefa = {
+        texto: inputTarefa.value,
+        concluida: false,
+    };
 
+    // Adiciona a nova tarefa ao array.
+    arrayTarefas.push(tarefa);
+
+    // Limpa o campo de texto.
+    inputTarefa.value = '';
+
+    // Feedback visual para o usuário.
+    inputTarefa.placeholder = 'Tarefa Adicionada!';
+
+    // Após 2 segundos retorna o placeholder original.
     setTimeout(function() {
-        input.placeholder = 'Digite uma tarefa';
+        inputTarefa.placeholder = 'Digite uma tarefa';
     }, 2000);
-    //após dois segundos, o texto de feedback é removido, voltando ao estado inicial do programa.
+
+    localStorage.setItem('tarefaSalva', JSON.stringify(arrayTarefas));
+
+    // Atualiza a lista exibida na tela.
     renderizarTarefas();
 }
 
 function renderizarTarefas() {
-//essa função é responsável por renderizar a lista de tarefas na tela.
-    
-    lista.innerHTML = '';
-    //limpa a lista para evitar que as tarefas sejam duplicadas toda vez que uma nova tarefa for adicionada.
 
-    listaDeTarefas.forEach(function(tarefa,index){
-        let listaHtml = document.createElement('li');
-        listaHtml.innerText = tarefa;
-        //para cada tarefa no array ListaDeTarefas, a função cria um elemento de lista (li) e define seu texto como a tarefa atual.
+    // Limpa a lista antes de renderizar novamente.
+    listaDOM.innerHTML = '';
 
-        let botaoDelete = document.createElement('button')
-        botaoDelete.innerText= ' Excluir'
-        //cria um botão de exclusão para cada tarefa, definindo seu texto como "Excluir".
-       
-        botaoDelete.addEventListener('click', function() {
-            listaDeTarefas.splice(index, 1);
+    // Percorre cada tarefa armazenada no array.
+    arrayTarefas.forEach(function(tarefa, indice) {
+
+        // Cria o elemento visual (<li>) da tarefa.
+        let tarefaDOM = document.createElement('li');
+        tarefaDOM.classList.add('card-tarefa');
+
+        // Define o símbolo de status.
+        // ✓ = concluída
+        // ☐ = pendente
+        let statusTexto = tarefa.concluida ? '✓' : '☐';
+
+        // Cria o span que exibirá o status.
+        let statusSpan = document.createElement('span');
+        statusSpan.innerText = statusTexto;
+
+        // Cria o span que exibirá o texto da tarefa.
+        let tarefaSpan = document.createElement('span');
+        tarefaSpan.innerText = tarefa.texto;
+
+        // Caso a tarefa esteja concluída,
+        // aplica o efeito de texto riscado.
+        if (tarefa.concluida) {
+            tarefaSpan.style.textDecoration = 'line-through';
+        }
+
+        // Adiciona os spans ao <li>.
+        tarefaDOM.appendChild(statusSpan);
+        tarefaDOM.appendChild(tarefaSpan);
+
+        // Cria o botão de conclusão.
+        let botaoConcluir = document.createElement('button');
+        botaoConcluir.classList.add('botaoConcluir');
+        botaoConcluir.innerText = ' Concluída';
+
+        // Cria o botão de exclusão.
+        let botaoExcluir = document.createElement('button');
+        botaoExcluir.classList.add('botaoExcluir');
+        botaoExcluir.innerText = ' Excluir';
+
+        // Ao clicar, alterna o status de conclusão da tarefa.
+        botaoConcluir.addEventListener('click', function() {
+            tarefa.concluida = !tarefa.concluida; 
             renderizarTarefas();
-            //adiciona um evento de clique ao botão de exclusão, que remove a tarefa correspondente do array ListaDeTarefas usando o método splice e, em seguida, chama a função renderizarTarefas para atualizar a lista exibida na tela.
+            //o "!" inverte o valor booleano, 
+            //ou seja, se for true passa a ser false e vice-versa.
         });
 
-        listaHtml.appendChild(botaoDelete);
-        lista.appendChild(listaHtml);
-        //adiciona o botão de exclusão como um filho do elemento de lista (li) e, em seguida, adiciona o elemento de lista à lista principal (ul) para exibir a tarefa na tela.
-        
-    });
 
+        // Remove a tarefa do array.
+        botaoExcluir.addEventListener('click', function() {
+            arrayTarefas.splice(indice, 1);
+            renderizarTarefas();
+        });
+
+        // Adiciona os botões ao <li>.
+        tarefaDOM.appendChild(botaoConcluir);
+        tarefaDOM.appendChild(botaoExcluir);
+
+        // Adiciona o <li> à lista principal.
+        listaDOM.appendChild(tarefaDOM);
+    });
     
+    salvarTarefas();
+    estatisticas();
 }
 
+function carregarTarefas() {
+    const tarefasSalvas = localStorage.getItem('tarefaSalva');
+    JSON.parse(tarefasSalvas) ? arrayTarefas = JSON.parse(tarefasSalvas) : arrayTarefas = [];
+    renderizarTarefas();
+}
+
+function salvarTarefas() {
+    localStorage.setItem('tarefaSalva', JSON.stringify(arrayTarefas));
+}
+
+function estatisticas() {
+    let totalTarefas = arrayTarefas.length;
+    // 2. Descobrir as Concluídas usando o .filter()
+    // O filter cria uma lista temporária só com as tarefas que têm "concluida: true"
+    let concluidas = arrayTarefas.filter(tarefa => tarefa.concluida === true).length;
+
+    // 3. Descobrir as Pendentes
+    let pendentes = totalTarefas - concluidas;
+    //4. injetar os valores na página
+    document.getElementById('totalTarefas').innerText = totalTarefas;
+    document.getElementById('concluidaTarefas').innerText = concluidas;
+    document.getElementById('pendenteTarefas').innerText = pendentes;
+}
+
+carregarTarefas();

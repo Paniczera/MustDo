@@ -7,23 +7,60 @@
     </head>
 
     <body>
+        <main class="container">
+            <header id= "tituloSite">
+                <h1><span id="logo">Must</span><span id="logo2">Do!</span></h1>
+                <div class="header-info">
+                    <span class="header-data">terça-feira, 16 de junho</span>
+                    <button class="dark-mode">🌙 Escuro</button>
+                </div>
+            </header>
 
-        <div id = "tituloSite">
-            <h1><span id="titulo1">Must</span><span id="titulo2">Do!</span></h1>
-        </div>
+            <!--<section class="info">
+                Data |
+                Barra de Progresso |
+                Cards de estatísticas 
+            </section>-->
+            
+            <section class="filtros">
+                <div class="card">
+                    <div class="card-icon">📋</div> 
+                    <div class="card-dados">
+                        <span class="num-card" id="totalTarefas">3</span>
+                        <span class="text-card">Total</span>
+                    </div>
+                </div>
 
-        <div>
-            <ul>
+                <div class="card">
+                    <div class="card-icon">⏰</div>
+                    <div class="card-dados">
+                        <span class="num-card" id="pendenteTarefas">3</span>
+                        <span class="text-card">Pendentes</span>
+                    </div>
+                </div>
 
-                <li>
-                    <input type="text" id="inputTarefa" placeholder="Digite uma tarefa">
-                    <button id="botao">Adicionar</button>
+                <div class="card">
+                    <div class="card-icon">✅</div>
+                    <div class="card-dados">
+                    <span class="num-card" id="concluidaTarefas">0</span>
+                    <span class="text-card">Concluídas</span>
+                </div>
+            </section>
 
-                    <ul id="lista"></ul>
-                </li></br>
-            </ul>
-        </div>
-            <script src="script.js"></script> 
+            <section class="area-geral">
+                <div class="area-adicionar">
+                    <input type="text"  id="inputTarefa" placeholder="Adicionar nova tarefa...">
+                    <button id="botao">+ Adicionar</button>
+                </div>
 
-    </body>
+                <ul id="lista"></ul>
+            </section>
+
+
+
+
+                <script src="script.js"></script> 
+        </main>
+
+        </body>
 </html>
