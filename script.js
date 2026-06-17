@@ -115,6 +115,7 @@ function renderizarTarefas() {
     
     salvarTarefas();
     estatisticas();
+    porcentagem();
 }
 
 function carregarTarefas() {
@@ -141,4 +142,20 @@ function estatisticas() {
     document.getElementById('pendenteTarefas').innerText = pendentes;
 }
 
+function porcentagem() {
+    let totalTarefas = arrayTarefas.length;
+    let concluidas = arrayTarefas.filter(tarefa => tarefa.concluida === true).length;
+    let porcentagem = totalTarefas > 0 ? (concluidas / totalTarefas) * 100 : 0;
+    document.getElementById('textoProgresso').innerText = `${porcentagem.toFixed(2)}%`;
+    document.getElementById('barraProgresso').style.width = `${porcentagem}%`;
+}
+
+function modoDark() {
+    const botaoDark = document.getElementById('botaoDark');
+    botaoDark.addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
+    });
+}
+
 carregarTarefas();
+modoDark();

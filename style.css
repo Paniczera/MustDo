@@ -3,10 +3,19 @@
     --card-bg: #ffffff;      /* Fundo branco dos cards */
     --text-dark: #2d3748;    /* Texto principal escuro */
     --text-muted: #a0aec0;   /* Texto cinza claro (datas, subtítulos) */
-    --green-dark: #3b5a40;   /* Verde escuro do título */
+    --green-dark: #2d9e40;   /* Verde escuro do título */
     --green-light: #6ba676;  /* Verde claro (botão e acentos) */
     --yellow-accent: #dca11d;/* Amarelo de pendentes */
     --sombra-suave: 0px 6px 16px rgba(0, 0, 0, 0.06);
+
+    --dm-color: #111827;     /* Fundo escuro */
+    --dm-card-bg: #1f2937;      /* Fundo dos cards escuro */
+    --dm-text-dark: #f3f4f6;    /* Texto principal claro */
+    --dm-text-muted: #9ca3af;   /* Texto cinza claro (datas, subtítulos) */
+    --dm-green-dark: #34d399;   /* Verde escuro do título */
+    --dm-green-light: #10b981;  /* Verde claro (botão e acentos) */
+    --dm-yellow-accent: #fbbf24;/* Amarelo de pendentes */
+    --dm-sombra-suave: 0px 6px 16px rgba(0, 0, 0, 0.35);
 }
 
 body {
@@ -17,6 +26,16 @@ body {
     padding: 20px;
 }
 
+body.dark-mode {
+    --bg-color: var(--dm-color);
+    --card-bg: var(--dm-card-bg);
+    --text-dark: var(--dm-text-dark);
+    --text-muted: var(--dm-text-muted);
+    --green-dark: var(--dm-green-dark);
+    --green-light: var(--dm-green-light);
+    --yellow-accent: var(--dm-yellow-accent);
+    --sombra-suave: var(--dm-sombra-suave);
+}
 
 li button {
     margin-left: 10px;
@@ -45,16 +64,13 @@ header {
 }
 
 #logo {
-    color: white;
-    -webkit-text-stroke: 1px #3e4652;
-    text-shadow: 2px 2px 3px rgba(0,0,0,0.5);
+    color: var(--text-dark); /* Fica escuro no modo claro, e clarinho no modo escuro! */
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.1);
 }
 
-
 #logo2 {
-    color: green;
-    -webkit-text-stroke: 1px #3e4652;
-    text-shadow: 2px 2px 3px rgba(0,0,0,0.5);
+    color: var(--green-dark); /* Usa a variável verde */
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.1);
 }
 
 .container {
@@ -85,7 +101,7 @@ header {
     width: 100%; /* Isso é crucial para eles se afastarem */
 }
 
-.dark-mode {
+.botaoDark {
     background: transparent;
     border: 1px solid #d1d1d1;
     border-radius: 20px;
@@ -236,6 +252,27 @@ header {
     background-color: #e53e3e2c;
     color: #e53e3e;
 }
+
+.progresso {
+    width: 100%;
+    height: 8px;
+    background-color: #e2e8f0;
+}
+
+#barraProgresso {
+    height: 100%;
+    background-color: #3ac257;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.dark-mode {
+    background-color: var(--dm-color);
+    color: var(--dm-text-dark);
+    
+}
+
+
 
 .num-total { color: var(--text-dark); }
 .num-pendente { color: var(--yellow-accent); }
