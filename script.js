@@ -208,6 +208,40 @@ function configurarFiltros() {
     });
 }
 
+async function fraseMotivacional () {
+    try {    
+        const resposta = await fetch('https://api.adviceslip.com/advice');
+        const dados = await resposta.json();
+        //o JS precisa do endereço completo daonde fica a mensagem do dia.
+        let frase = dados.slip.advice;
+        document.getElementById('fraseDoDia').innerText = `💡 "${frase}"`
+    } catch (erro){
+        document.getElementById('fraseDoDia').innerText = 'Não foi possível carregar a frase do dia...'
+
+    }
+}
+
+function dataAtual() {
+    // 1. Pega a data do sistema e o modelo
+    const dataSistema = new Date();
+    const formatoData = {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long'
+    };
+    
+    // 2. Cria o texto final formatado (agora com a letra 'e' no toLocaleDateString)
+    let dataFormato = dataSistema.toLocaleDateString('pt-BR', formatoData);
+    
+    // 3. Pesca APENAS o elemento HTML (a tag, não o texto)
+    const elementoData = document.getElementById('header-data');
+    
+    // 4. Se a tag existir na tela, injeta o texto formatado nela
+    if (elementoData) {
+        elementoData.innerText = dataFormato;
+    }
+}
+
 
 
 
@@ -216,3 +250,5 @@ carregarTarefas();
 modoDark();
 configurarFiltros();
 limparTarefas();
+fraseMotivacional();
+dataAtual();
