@@ -11,6 +11,10 @@ const listaDOM = document.getElementById('lista');
 // Armazena todas as tarefas cadastradas.
 let arrayTarefas = [];
 let filtroAtual = "todas";
+let idEdit = null;
+// Variável para rastrear se estamos editando alguma tarefa
+// Se for null, estamos adicionando uma tarefa nova. 
+// Se tiver um número, é o índice da tarefa sendo editada.
 
 // Quando o botão for clicado, executa a função adicionaTarefa.
 botaoAdicionar.addEventListener('click', adicionaTarefa);
@@ -25,15 +29,20 @@ function adicionaTarefa() {
     // Impede que tarefas vazias sejam adicionadas.
     if (inputTarefa.value.trim() === '') return;
 
-    // Objeto que representa uma tarefa.
-    const tarefa = {
-        texto: inputTarefa.value,
-        concluida: false,
-    };
-
-    // Adiciona a nova tarefa ao array.
-    arrayTarefas.push(tarefa);
-
+    if(idEdit == null) {
+        // Objeto que representa uma tarefa.
+        const tarefa = {
+            texto: inputTarefa.value,
+            concluida: false,
+        };
+    
+        // Adiciona a nova tarefa ao array.
+        arrayTarefas.push(tarefa);
+    } else {
+        arrayTarefas[idEdit].texto = inputTarefa.value;
+        idEdit = null;
+        document.getElementById('botao').innerText = '+ Adicionar'
+    }
     // Limpa o campo de texto.
     inputTarefa.value = '';
 
@@ -120,8 +129,20 @@ function renderizarTarefas() {
             renderizarTarefas();
         });
 
+        let botaoEditar = document.createElement('button');
+        botaoEditar.classList.add('botaoEditar');
+        botaoEditar.innerText = ' Editar';
+
+        botaoEditar.addEventListener('click', function() {
+            let indiceReal = arrayTarefas.indexOf(tarefa);
+
+            prepararEdicao(indiceReal);
+        })
+        
+
         // Adiciona os botões ao <li>.
         tarefaDOM.appendChild(botaoConcluir);
+        tarefaDOM.appendChild(botaoEditar);
         tarefaDOM.appendChild(botaoExcluir);
 
         // Adiciona o <li> à lista principal.
@@ -142,6 +163,17 @@ function carregarTarefas() {
 
 function salvarTarefas() {
     localStorage.setItem('tarefaSalva', JSON.stringify(arrayTarefas));
+}
+
+function prepararEdicao(indiceReal) {
+    // Puxa o texto da tarefa específica de volta para o input
+    inputTarefa.value = arrayTarefas[indiceReal].texto;
+
+    // Salva na variável global qual é a tarefa que estamos editando
+    idEdit = indiceReal;
+
+    // Muda o texto do botão principal para dar feedback visual
+    document.getElementById('botao').innerText = 'Salvar Edição';
 }
 
 function estatisticas() {
@@ -241,8 +273,6 @@ function dataAtual() {
         elementoData.innerText = dataFormato;
     }
 }
-
-
 
 
 

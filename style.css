@@ -241,8 +241,28 @@ header {
     cursor: pointer;
     transition: 0.2s;
     margin-left: 8px; /* Dá um espacinho entre os dois botões */
+    align-items: right;
+
 }
 
+.botaoEditar {
+    background-color: transparent;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 12px;    
+    color: var(--text-muted, #a0aec0);
+    cursor: pointer;
+    transition: 0.2s;
+    margin-left: 8px; /* Dá um espacinho entre os dois botões */
+    align-items: right;
+}
+
+
+.botaoEditar:hover {
+    background-color: #1992c22f;
+    color:#29a0cf;
+}
 
 .botaoConcluir:hover {
     background-color: #3ac2572c;
